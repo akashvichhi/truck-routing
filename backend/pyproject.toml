@@ -1,0 +1,48 @@
+[project]
+name = "truck-routing-backend"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "django==5.2.18",
+    "djangorestframework==3.15.2",
+    "django-cors-headers==4.6.0",
+    "requests==2.32.3",
+    "python-dotenv==1.0.1",
+    "polyline==2.0.2",
+    "gunicorn==23.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.3.3",
+    "pytest-django==4.9.0",
+    "pytest-cov==6.0.0",
+    "responses==0.25.3",
+    "ruff==0.8.2",
+    "mypy==1.13.0",
+    "django-stubs==5.2.0",
+    "djangorestframework-stubs==3.15.1",
+    "types-requests==2.32.0.20241016",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--cov=api --cov-report=term-missing --cov-fail-under=80"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings"
